@@ -1,1 +1,4 @@
-dan toch dit gedoe
+clone
+stage
+commit
+push
