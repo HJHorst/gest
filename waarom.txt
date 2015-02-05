@@ -1,0 +1,4 @@
+clone .. van centraal naar lokaal
+stage .. wijzigingen klaarzetten
+commit.. wijzigingen lokaal committen
+push  .. wijzigingen naar centraal
