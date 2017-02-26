@@ -1,7 +1,6 @@
 # gest
 # gast
 
-Geen ruzie toch?
-Gaan we meemaken.
+Hekje, wat is dat voor hekje?
 Harkje, wat is dat voor harkje?
 In de tuin.
