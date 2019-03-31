@@ -23,9 +23,8 @@ for line in f:
     for tag in tags:
         # print('TAG:'+tag)
         if '/>' in tag:
-            print('START-END')
+            continue
         elif '/' in tag:
-            # print('END')
             endTags = close_missing_tags(boom, tag)
             line = line.replace(tag, endTags)
         else:
