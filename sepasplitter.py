@@ -1,7 +1,7 @@
 import re
 import logging
 
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(level=logging.DEBUG)
 
 
 class SepaSplitter:
@@ -70,12 +70,37 @@ class SepaSplitter:
                     # self.parse_structured(doc, line)
         self.parse_structure(doc, structured)
         logging.info(doc)
+        return doc
 
     def write_document(self, lines):
         # logging.info('write')
         # document = open(str(uuid.uuid4()) + '.txt', 'w')
         # document.writelines(lines)
-        self.parse_document(lines)
+        doc = self.parse_document(lines)
+        x = '3.103'
+        logging.info(self.get_dot_value(doc, x))
+        tags = [['BEDRAG', '4.33B', '[3:]'], ['VALUTA', '4.33B', '[0:3]'], ['IBAN', '4.50K', '.split(''\n'')[0][1:]']]
+        logging.info(self.create_xml(doc, tags))
+
+    def create_xml(self, doc, tags):
+        xml = ''
+        for tag in tags:
+            val = self.get_dot_value(doc, tag[1])
+            if len(tag) == 3:
+                logging.debug('==>%s', val+tag[2])
+                val = eval('val'+tag[2])
+            xml += '<'+tag[0]+'>'+val+'</'+tag[0]+'>'
+        return xml
+
+    def get_dot_value(self, doc, dotexpr):
+        attrs = dotexpr.split('.')
+        return self.get_value(doc, attrs)
+
+    def get_value(self, doc, attrs):
+        if len(attrs) > 1:
+            return self.get_value(doc[attrs[0]], attrs[1:])
+        else:
+            return doc[attrs[0]]
 
     def process_file(self, filename):
         lines = []
